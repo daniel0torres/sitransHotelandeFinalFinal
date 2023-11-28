@@ -16,8 +16,8 @@ public class Hello {
     public Hello() {
     }
 
-    public Hello(ObjectId _id, String name, int edad) {
-        this._id = _id;
+    public Hello(String name, int edad) {
+        
         this.name = name;
         this.edad = edad;
     }
