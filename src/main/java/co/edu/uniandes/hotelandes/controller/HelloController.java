@@ -11,15 +11,15 @@ import org.bson.types.ObjectId;
 import org.springframework.data.repository.query.Param;
 
 @RestController
-public class HelloWorldController {
+public class HelloController {
 
+    
+    
     @Autowired
     HelloRepository helloRepository;
+    
+    
 
-    @GetMapping(value = "/hello")
-    public String index() {
-        return "HOLA";
-    }
 
     @GetMapping(value = "/hello2")
     public List<Hello> index2() {
@@ -36,8 +36,8 @@ public class HelloWorldController {
     }
     @GetMapping(value = "/find")
     public Hello crearHello(@Param(value = "id")String id){
-        Hello h = helloRepository.findById(new ObjectId(id)).orElse(null);
-        return h;
+        Hello hello = helloRepository.findById(new ObjectId(id)).orElse(null);
+        return hello;
     }
 }
 
