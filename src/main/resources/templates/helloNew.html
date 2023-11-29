@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Hotelandes</title>
+        <link th:replace="fragments/encabezado.html" />
+    </head>
+    <body>
+        <nav th:replace="fragments/menu.html"></nav>
+        <form  th:action="@{/hellos/new/save}" method="post">
+            <div th:replace="~{fragments/helloForm :: helloForm(titulo='Crear hellos')}"></div>
+        </form>
+    </body>
+</html>

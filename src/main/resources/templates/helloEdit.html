@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Editar hello</title>
+        <link th:replace="fragments/encabezado.html" />
+</head>
+<body>
+    <nav th:replace="fragments/menu.html"></nav>
+    <form th:action="@{'/hellos/' + ${id} + '/edit/save'}" th:object="${hello}" method="post">
+        <div th:replace="~{fragments/helloForm :: helloForm(titulo='Editar hello', hello=${hello})}">
+    </form>
+    
+</body>
+</html>
