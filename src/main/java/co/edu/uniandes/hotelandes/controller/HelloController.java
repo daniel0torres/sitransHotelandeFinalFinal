@@ -26,12 +26,12 @@ public class HelloController {
     @GetMapping("/hellos/new")
     public String create(Model model) {
         model.addAttribute("hello", new Hello());
-        return "helloNuevo";
+        return "helloNew";
     }
 
     @PostMapping("/hellos/new/save")
     public String createSave(@ModelAttribute Hello hello) {
-        helloRepository.insert(new Hello(hello.getName(),hello.getEdad()));
+        helloRepository.insert(hello);
 
         return "redirect:/hellos";
     }
@@ -42,7 +42,7 @@ public class HelloController {
         Hello hello = helloRepository.findById(objectId).orElse(null);
         if (hello != null) {
             model.addAttribute("hello", new Hello());
-            return "helloEditar";
+            return "helloEdit";
         }
 
         else {
