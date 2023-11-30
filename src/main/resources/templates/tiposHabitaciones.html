@@ -49,6 +49,7 @@
                                 <td th:text="${tipoHabitacion.descripcion}"></td>
                                 
                                 
+                                
                                 <td>
                                     <a th:href="@{'/tiposHabitaciones/' + ${tipoHabitacion.id} + '/edit'}"class="btn btn-warning btn-sm">Editar</a>
                                     <a th:href="@{'/tiposHabitaciones/' + ${tipoHabitacion.id}+ '/delete'}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de borrar el tipo de habitación?')">Borrar</a>

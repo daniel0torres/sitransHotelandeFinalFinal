@@ -1,8 +1,4 @@
 package co.edu.uniandes.hotelandes.controller;
-
-
-
-import co.edu.uniandes.hotelandes.model.Hello;
 import co.edu.uniandes.hotelandes.model.TipoHabitacion;
 import co.edu.uniandes.hotelandes.repository.TipoHabitacionRepository;
 import org.bson.types.ObjectId;
