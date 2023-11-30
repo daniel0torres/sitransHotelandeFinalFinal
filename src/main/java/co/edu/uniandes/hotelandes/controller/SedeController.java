@@ -1,5 +1,6 @@
 package co.edu.uniandes.hotelandes.controller;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,9 +36,10 @@ public class SedeController {
         return "redirect:/sedes";
     }
 
-    @GetMapping("/sedes/{nombre}/edit")
-    public String update(@PathVariable String nombre, Model model) {
-        Sede sede = sedeRepository.findById(nombre).orElse(null);
+    @GetMapping("/sedes/{id}/edit")
+    public String update(@PathVariable String id, Model model) {
+        ObjectId objectId = new ObjectId(id);
+        Sede sede = sedeRepository.findById(objectId).orElse(null);
         if (sede != null) {
             model.addAttribute("sede", new Sede());
             return "sedesEdit";
@@ -47,16 +49,18 @@ public class SedeController {
         }
     }
 
-    @PostMapping("/sedes/{nombre}/edit/save")
-    public String updateSave(@PathVariable("nombre") String nombre, @ModelAttribute Sede sede) {
-        sede.setNombre(nombre);
+    @PostMapping("/sedes/{id}/edit/save")
+    public String updateSave(@PathVariable("id") String id, @ModelAttribute Sede sede) {
+        ObjectId objectId = new ObjectId(id);
+        sede.set_id(objectId);
         sedeRepository.save(sede);
         return "redirect:/sedes";
     }
 
-    @GetMapping("/sedes/{nombre}/delete")
-    public String delete(@PathVariable String nombre) {
-        sedeRepository.deleteById(nombre);
+    @GetMapping("/sedes/{id}/delete")
+    public String delete(@PathVariable String id) {
+        ObjectId objectId = new ObjectId(id);
+        sedeRepository.deleteById(objectId);
         return "redirect:/sedes";
     }
 }
