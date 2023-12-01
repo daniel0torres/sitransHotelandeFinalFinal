@@ -46,10 +46,16 @@ public class AlojamientoController {
         //try {
         ObjectId reservaId = new ObjectId(reserva);
         Reservas reservaObj = reservaRepository.findById(reservaId).orElse(null);
-
+            
         if (reservaObj == null) {
             model.addAttribute("error", "Reserva no encontrada.");
-            return "rutaFormularioAlojamiento"; // Devuelve al formulario en caso de error
+            return "redirect:/alojamientos"; // Devuelve al formulario en caso de error
+        }
+
+        Alojamiento alojamientoExistente = alojamientoRepository.findByReserva(reservaId);
+        if (alojamientoExistente != null) {
+            model.addAttribute("error", "Ya existe un alojamiento con esta reserva.");
+            return "redirect:/alojamientos"; 
         }
 
         String cliente = reservaObj.getCliente(); // Obtén el cliente de la reserva
