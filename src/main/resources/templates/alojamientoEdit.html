@@ -10,7 +10,7 @@
     <nav th:replace="fragments/menu.html"></nav>
     <div th:fragment="alojamientoForm(titulo)" class="container border border-2 w-25">
         <h1 class="text-center" th:text="${titulo}"></h1>
-        <form th:action="/alojamientos/{id}/edit/save(id=${alojamiento._id})" method="post">
+        <form th:action="@{/alojamientos/{id}/edit/save(id=${alojamiento._id})}" method="post">
             <label  class="col-form-label">habitacion id</label>
             <input  class="form-control" type="text" id="habitacion" name="habitacion" required th:value="${alojamiento.habitacion}" />
             <label  class="col-form-label">fecha Llegada</label>

@@ -34,7 +34,9 @@
                                 <th>ID Habitación</th>
                                 <th>Dia llegda</th>
                                 <th>Dia salida</th>
+                                <th>cliente</th>
                                 <th>Acciones</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -48,9 +50,9 @@
                                 <td th:unless="${alojamiento.fechaLlegada != '-1' and alojamiento.fechaSalida != null}" th:text="${alojamiento.reservaInfo?.checkin}"></td>
                                 <td th:unless="${alojamiento.fechaLlegada != '-1' and alojamiento.fechaSalida != null}" th:text="${alojamiento.reservaInfo?.checkout}"></td>
 
-
+                                <td th:text="${alojamiento.reservaInfo?.cliente}"> </td>
                                 <td>
-                                    <a th:href="'/alojamientos/' + ${alojamiento._id} + '/edit'"class="btn btn-warning btn-sm">Editar</a>
+                                    <a th:href="@{'/alojamientos/' + ${alojamiento._id} + '/edit'}"class="btn btn-warning btn-sm">Editar</a>
                                     <a th:href="@{'/alojamientos/' + ${alojamiento._id}+ '/delete'}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de borrar el alojamiento?')">Borrar</a>
                                 </td>  
                             </tr>
