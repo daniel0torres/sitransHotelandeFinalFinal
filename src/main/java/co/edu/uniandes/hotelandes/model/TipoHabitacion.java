@@ -25,9 +25,6 @@ public class TipoHabitacion {
         this.descripcion = descripcion;
     }
 
-    
-    
-
     public ObjectId getId() {
         return _id;
     }

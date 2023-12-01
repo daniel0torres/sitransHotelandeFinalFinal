@@ -11,13 +11,20 @@ import lombok.Data;
 public class Reservas {
     @Id
     private ObjectId _id;
-    private String checkIn;
-    private String checkOut;
+    private String cliente;
+    private String checkin;
+    private String checkout;
+    private String sede;
 
     public Reservas() {}
 
-    public Reservas(String checkIn, String checkOut) {
-        this.checkIn = checkIn;
-        this.checkOut = checkOut;
+    public Reservas(String checkIn, String checkOut, String cliente, String sede) {
+        this.cliente = cliente;
+        this.checkin = checkIn;
+        this.checkout = checkOut;
+        this.sede= sede;
+    }
+    public String getCliente(){
+        return this.cliente;
     }
 }

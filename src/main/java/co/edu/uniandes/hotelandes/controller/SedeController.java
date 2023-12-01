@@ -52,7 +52,7 @@ public class SedeController {
     @PostMapping("/sedes/{id}/edit/save")
     public String updateSave(@PathVariable("id") String id, @ModelAttribute Sede sede) {
         ObjectId objectId = new ObjectId(id);
-        sede.set_id(objectId);
+        sede.setId(objectId);
         sedeRepository.save(sede);
         return "redirect:/sedes";
     }
