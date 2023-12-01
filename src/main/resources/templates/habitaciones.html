@@ -17,12 +17,12 @@
                     <div class="table-title">
                         <div class="row">
                             <div class="col-xs-6">
-                                <h2>Administrar <b>Sedes</b></h2>
+                                <h2>Administrar <b>habitaciones</b></h2>
                             </div>
                             <div class="col-xs-6">
 
 
-                                <a th:href="@{sedes/new}" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Añadir</span></a>
+                                <a th:href="@{habitaciones/new}" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Añadir</span></a>
 
                             </div>
                         </div>
@@ -30,27 +30,26 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Direccion</th>
-                                <th>telefono</th>
-                                <th>acciones</th>
+                                <th>ID Habitacion</th>
+                                <th>tipo habitacion</th>
+                                <th>Acciones</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-
-
-                            <tr th:each="sede : ${sedes}">
-
-                                <td th:text="${sede.nombre}"></td>
-                                <td th:text="${sede.direccion}"></td>
-                                <td th:text="${sede.telefono}"></td>
+                            <tr th:each="habitacion : ${habitaciones}">
+                                <td th:text="${habitacion.numero}"></td>
+                                <td th:text="${habitacion.tipoHabitacion}"></td>
                                 <td>
-                                    <a th:href="@{'/sedes/' + ${sede._id} + '/habitaciones'}"  class="btn btn-warning btn-sm">Ver habitaciones</a>
-                                </td>                                
+                                    <a th:href="@{'/habitaciones/' + ${habitacion.id} + '/edit'}"class="btn btn-warning btn-sm">Editar</a>
+                                    <a th:href="@{'/habitaciones/' + ${habitacion.id}+ '/delete'}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de borrar el habitacion?')">Borrar</a>
+                                </td>  
                             </tr>
+                                                          
                         </tbody>
                     </table>
-
+                    
+                    
                 </div>
             </div>        
         </div>
