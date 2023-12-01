@@ -41,10 +41,16 @@
                             <tr th:each="alojamiento : ${alojamientos}">
                                 <td th:text="${alojamiento._id}"></td>
                                 <td th:text="${alojamiento.habitacion}"></td>
-                                <td th:text="${alojamiento.reservaInfo?.checkin}"></td>
-                                <td th:text="${alojamiento.reservaInfo?.checkout}"></td>
+
+                                <td th:if="${alojamiento.fechaLlegada != '-1' and alojamiento.fechaSalida != null}" th:text="${alojamiento.fechaLlegada}"></td>
+                                <td th:if="${alojamiento.fechaLlegada != '-1' and alojamiento.fechaSalida != null}" th:text="${alojamiento.fechaSalida}"></td>
+
+                                <td th:unless="${alojamiento.fechaLlegada != '-1' and alojamiento.fechaSalida != null}" th:text="${alojamiento.reservaInfo?.checkin}"></td>
+                                <td th:unless="${alojamiento.fechaLlegada != '-1' and alojamiento.fechaSalida != null}" th:text="${alojamiento.reservaInfo?.checkout}"></td>
+
+
                                 <td>
-                                    <a th:href="@{'/alojamientos/' + ${alojamiento._id} + '/edit'}"class="btn btn-warning btn-sm">Editar</a>
+                                    <a th:href="'/alojamientos/' + ${alojamiento._id} + '/edit'"class="btn btn-warning btn-sm">Editar</a>
                                     <a th:href="@{'/alojamientos/' + ${alojamiento._id}+ '/delete'}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de borrar el alojamiento?')">Borrar</a>
                                 </td>  
                             </tr>

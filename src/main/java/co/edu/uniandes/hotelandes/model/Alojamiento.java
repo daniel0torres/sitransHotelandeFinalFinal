@@ -1,6 +1,7 @@
 package co.edu.uniandes.hotelandes.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -20,6 +21,8 @@ public class Alojamiento {
     private ObjectId reserva; // ID de la reserva
     private String cliente; // Nombre del cliente
     private Reservas reservaInfo;
+    private String fechaLlegada;
+    private String fechaSalida;
 
     public Alojamiento() {}
 
@@ -28,7 +31,27 @@ public class Alojamiento {
         this.consumos =new ArrayList<>();
         this.reserva = reserva;
         this.cliente = cliente;
+        this.fechaLlegada = "-1";
+        this.fechaSalida = "-1";
     }
+
+    public String getFechaLlegada(){
+        return this.fechaLlegada;
+    }
+
+    public void setFechaLlegada(String fechaLlegada){
+        this.fechaLlegada = fechaLlegada;
+    }
+
+    public void setFechaSalida(String fechaSalida){
+        this.fechaSalida = fechaSalida;
+    }
+
+
+    public String getFechaSalida(){
+        return this.fechaSalida;
+    }
+
 
     public ObjectId get_id() {
         return _id;

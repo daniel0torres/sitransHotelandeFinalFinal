@@ -69,7 +69,7 @@ public class AlojamientoController {
         ObjectId objectId = new ObjectId(id);
         Alojamiento alojamiento = alojamientoRepository.findById(objectId).orElse(null);
         if (alojamiento != null) {
-            model.addAttribute("alojamiento", new Alojamiento());
+            model.addAttribute("alojamiento", alojamiento);
             return "alojamientoEdit";
         }
 
@@ -78,12 +78,18 @@ public class AlojamientoController {
         }
     }
     
-    @PostMapping("hotelandes/alojamientos/{id}/edit/save")
-    public String updateSave(@PathVariable("id") String id, @RequestParam String habitacion) {
+    @PostMapping("/alojamientos/{id}/edit/save")
+    public String updateSave(@PathVariable("id") String id,  @RequestParam String fechaLlegada, @RequestParam String fechaSalida, @RequestParam String habitacion) {
         ObjectId objectId = new ObjectId(id);
         Optional<Alojamiento> alojamientoOptional = alojamientoRepository.findById(objectId);
         Alojamiento alojamiento = alojamientoOptional.orElse(null);
         alojamiento.setHabitacion(habitacion);
+        if (fechaLlegada != null) {
+            alojamiento.setFechaLlegada(fechaLlegada);
+        }
+        if (fechaSalida != null){
+            alojamiento.setFechaSalida(fechaSalida);
+        }        
        
         alojamientoRepository.save(alojamiento);
         
