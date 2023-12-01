@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Editar reservas</title>
+        <link th:replace="fragments/encabezado.html" />
+</head>
+<body>
+    <nav th:replace="fragments/menu.html"></nav>
+    <div class="container border border-2 w-25">
+        <h1 class="text-center" th:text="${titulo}"></h1>
+        <form th:action="@{/reservas/{id}/edit/save(id=${reserva._id})}" th:object="${reserva}"  method="post">
+            
+            <label  class="col-form-label">Cliente</label>
+            <input  class="form-control" type="text" id="cliente" name="cliente" required th:value="${reserva.cliente}" />
+            <label  class="col-form-label">sede</label>
+            <input  class="form-control" type="text" id="sede" name="sede" required th:value="${reserva.sede}" />
+            <label  class="col-form-label">Check in</label>
+            <input  class="form-control" type="date" id="checkin" placeholder="yyyy-MM-dd" name="checkin" required th:field="*{checkin}"/>
+            <label  class="col-form-label">Check Out</label>
+            <input  class="form-control" type="date" id="checkout" placeholder="yyyy-MM-dd" name="checkout" required th:field="*{checkout}" />
+            <div class="text-center">
+                <input type="submit" value="Guardar" class="btn btn-primary"/>
+                <a th:href="@{/reservas}" class="btn btn btn-primary">Cancelar</a>
+            </div>
+          
+    </div> 
+    
+</body>
+</html>
