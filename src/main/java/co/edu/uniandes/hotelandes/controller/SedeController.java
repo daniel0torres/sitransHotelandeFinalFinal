@@ -139,7 +139,9 @@ public class SedeController {
         LocalDate hoy = LocalDate.now();
 
         for (Alojamiento alojamiento : alojamientos) {
-            if (alojamiento.getHabitacion().equals(habitacionObjectId)) {
+        
+            if (habitacionObjectId.equals(alojamiento.getHabitacionId())) {
+
                 LocalDate llegada = alojamiento.getFechaLlegada().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate salida = alojamiento.getFechaSalida().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     
@@ -157,7 +159,8 @@ public class SedeController {
         double ocupacion = (double) totalDiasOcupados / totalDiasHastaHoy * 100;
     
         model.addAttribute("ocupacion", ocupacion);
-    
+        System.out.println(totalDiasHastaHoy);
+        System.out.println(totalDiasOcupados);
         return "ocupacion";
     }
 
