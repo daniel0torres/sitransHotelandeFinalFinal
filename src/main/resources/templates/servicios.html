@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Hotelandes</title>
+        <link th:replace="fragments/encabezado.html" />
+
+    </head>
+    <body>
+        <nav th:replace="fragments/menu.html"></nav>
+
+
+        <div class="container">
+            <div class="table-responsive">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <h2>Administrar <b>Servicios</b></h2>
+                            </div>
+                            <div class="col-xs-6">
+
+
+                                <a th:href="@{servicios/new}" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Añadir</span></a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID Servicio</th>
+                                <th>Tipo de Servicio</th>
+                                <th>Descripcion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="servicio : ${servicios}">
+                                <td th:text="${servicio._id}"></td>
+                                <td th:text="${servicio.tipo}"></td>
+                                <td th:text="${servicio.descripcion}"></td>
+                                <td>
+                                    <a th:href="@{'/servicios/' + ${servicio._id} + '/edit'}"class="btn btn-warning btn-sm">Editar</a>
+                                    <a th:href="@{'/servicios/' + ${servicio._id}+ '/delete'}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de borrar el servicio?')">Borrar</a>
+                                </td>  
+                            </tr>
+                                                          
+                        </tbody>
+                    </table>
+                    
+                    
+                </div>
+            </div>        
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    </body>
+</html>
