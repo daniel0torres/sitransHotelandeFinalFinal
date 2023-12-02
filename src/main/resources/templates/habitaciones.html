@@ -22,7 +22,7 @@
                             <div class="col-xs-6">
 
 
-                                <a th:href="@{habitaciones/new}" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Añadir</span></a>
+                                <a th:href="@{'/sedes/' + ${sedeId} + '/habitaciones/new'}" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Añadir</span></a>
 
                             </div>
                         </div>
@@ -41,8 +41,8 @@
                                 <td th:text="${habitacion.numero}"></td>
                                 <td th:text="${habitacion.tipoHabitacion}"></td>
                                 <td>
-                                    <a th:href="@{'/habitaciones/' + ${habitacion.id} + '/edit'}"class="btn btn-warning btn-sm">Editar</a>
-                                    <a th:href="@{'/habitaciones/' + ${habitacion.id}+ '/delete'}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de borrar el habitacion?')">Borrar</a>
+                                    <a th:href="@{'/sedes/'+ ${sedeId}+'/habitaciones/' + ${habitacion.numero}+ '/edit'}"class="btn btn-warning btn-sm">Editar</a>
+                                    <a th:href="@{'/sedes/'+ ${sedeId}+'/habitaciones/' + ${habitacion.numero}+ '/delete'}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de borrar el habitacion?')">Borrar</a>
                                 </td>  
                             </tr>
                                                           
