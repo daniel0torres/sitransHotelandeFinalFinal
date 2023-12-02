@@ -93,28 +93,25 @@ public class SedeController {
     }
     
     @PostMapping("/sedes/{sedeId}/habitaciones/{habitacionId}/edit/save")
-    public String updateSave(@PathVariable String sedeId,@ModelAttribute String habitacionId, @ModelAttribute Habitacion habitacionActualizada, BindingResult result) {
+    public String updateSave(@PathVariable String sedeId,@PathVariable String habitacionId, @ModelAttribute Habitacion habitacionActualizada, BindingResult result) {
         ObjectId sedeIdObj = new ObjectId(sedeId);
         Sede sede = sedeRepository.findById(sedeIdObj).orElse(null);
         if (sede != null) {
             List<Habitacion> habitaciones = sede.getHabitaciones();
             if (habitaciones != null) {
                 for (int i =0 ; i < habitaciones.size(); i++) {
-                    System.out.println(habitaciones.get(i).getNumero());
-                    if (!habitaciones.get(i).getNumero().equals(habitacionId)) {
-                        System.out.println("sexxx");
+                    System.out.println("Comparando: " + habitacionId + " con " + habitaciones.get(i).getNumero());
+
+                    if (habitacionId.equals(habitaciones.get(i).getNumero())) {
                         habitaciones.set(i, habitacionActualizada); 
                         break;
                     }
                 }
                 sedeRepository.save(sede); 
                 return "redirect:/sedes/{sedeId}/habitaciones";
-            }else{
-
-            return "error";
-            }
             
         }
+    }
         return "error1";
         
     }
