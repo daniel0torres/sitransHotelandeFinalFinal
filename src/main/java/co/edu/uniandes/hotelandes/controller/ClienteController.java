@@ -16,4 +16,7 @@ public class ClienteController {
         model.addAttribute("clientes", ClienteRepository.findAll());
         return "clientes";
     }
+
+    
+    
 }
