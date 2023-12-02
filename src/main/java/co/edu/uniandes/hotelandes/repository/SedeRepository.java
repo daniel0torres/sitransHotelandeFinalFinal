@@ -5,6 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import co.edu.uniandes.hotelandes.model.Sede;
 
-public interface SedeRepository extends MongoRepository<Sede, ObjectId> {
+public interface SedeRepository extends MongoRepository<Sede, ObjectId>, SedeRepositoryCustom {
     
 }
