@@ -21,13 +21,13 @@ public class SedeRepositoryCustomImpl implements SedeRepositoryCustom {
 
     @Autowired
     private MongoTemplate mongoTemplate;
-
+    
     @Override
     public Sede insertHabitacion(String sedeId, Habitacion habitacion) {
 
         Query query = new Query(Criteria.where("_id").is(sedeId));
         Sede sede = mongoTemplate.findOne(query, Sede.class);
-
+        habitacion.setIdCustom();
         if (sede != null) {
             List<Habitacion> habitaciones = sede.getHabitaciones();
             habitaciones.add(habitacion);
@@ -63,6 +63,19 @@ public class SedeRepositoryCustomImpl implements SedeRepositoryCustom {
 
         mongoTemplate.save(sede);
     }
+
+    @Override
+    public String findHabitacionById(ObjectId habitacionId, List<Sede> todasLasSedes) {
+        for (Sede sede : todasLasSedes) {
+            for (Habitacion habitacion : sede.getHabitaciones()) {
+                if (habitacion.getId().equals(habitacionId)) {
+                    return habitacion.getNumero();
+                }
+            }
+        }
+        return null; 
+    }
+
 
 
 }
