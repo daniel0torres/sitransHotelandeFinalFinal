@@ -84,9 +84,16 @@ public class ConsumosPorClienteController {
     public String update(Model model, @PathVariable("id_cliente") String id_cliente, @PathVariable("num_consumo") int numConsumo) {
         Cliente clienteActual = findClienteById(id_cliente);
         Consumo consumo = clienteActual.getConsumos().get(numConsumo);
-
+        
         if (consumo != null) {
-            fillModel(model, clienteActual);
+            ObjectId servicioId = consumo.getServicio();
+            Servicio servicio = servicioRepository.findById(servicioId).orElseThrow(() -> new IllegalArgumentException("Servicio no encontrado con ID: " + servicioId));
+            String nombre = servicio.getTipo();
+            Integer costo = servicio.getCosto();
+            consumo.setCosto(costo);
+            consumo.setNombre(nombre);
+
+            model.addAttribute("cliente", clienteActual);
             model.addAttribute("num_consumo", numConsumo);
             model.addAttribute("consumo",clienteActual.getConsumos().get(numConsumo));
             return "consumoPorClienteEdit";
@@ -99,7 +106,15 @@ public class ConsumosPorClienteController {
     @PostMapping("/clientes/{id_cliente}/consumos/{num_consumo}/edit/save")
     public String updateSave(@ModelAttribute Consumo consumo, @PathVariable("id_cliente") String id_cliente, @PathVariable("num_consumo") int numConsumo) {
         Cliente clienteActual = findClienteById(id_cliente);
+        ObjectId servicioId = consumo.getServicio();
+        Servicio servicio = servicioRepository.findById(servicioId).orElseThrow(() -> new IllegalArgumentException("Servicio no encontrado con ID: " + servicioId));
+        String nombre = servicio.getTipo();
+        Integer costo = servicio.getCosto();
+        consumo.setCosto(costo);
+        consumo.setNombre(nombre);
+        
         clienteActual.getConsumos().set(numConsumo, consumo);
+        
         clienteRepository.save(clienteActual);
 
         return "redirect:/clientes/{id_cliente}/consumos";
