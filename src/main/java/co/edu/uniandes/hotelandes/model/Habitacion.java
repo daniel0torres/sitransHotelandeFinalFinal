@@ -18,7 +18,7 @@ public class Habitacion {
         this.tipoHabitacion = tipoHabitacion;
         this.numero = numero;
     }
-
+    
     public String getNumero() {
         return this.numero;
     }
@@ -28,11 +28,15 @@ public class Habitacion {
     }
 
     public ObjectId getId() {
-        return _id;
+        return this._id;
     }
 
-    public void setId(ObjectId _id) {
-        this._id = _id;
+    public void setId(ObjectId id) {
+        this._id = id;
+    }
+
+    public void setIdCustom() {
+        this._id = new ObjectId();
     }
 
     public String getTipoHabitacion() {

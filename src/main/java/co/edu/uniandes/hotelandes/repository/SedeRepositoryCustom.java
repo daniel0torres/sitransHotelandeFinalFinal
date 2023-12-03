@@ -13,5 +13,5 @@ public interface SedeRepositoryCustom {
     Sede insertHabitacion(String sedeId, Habitacion habitacion);
     void deleteHabitacion(ObjectId sedeId, String numero);
     Habitacion findHabitacion(Sede sede, String numero);
-
+    String findHabitacionById(ObjectId habitacionId, List<Sede> sedes);
 }

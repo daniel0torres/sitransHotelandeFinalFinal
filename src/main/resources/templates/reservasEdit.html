@@ -11,7 +11,7 @@
     <div class="container border border-2 w-25">
         <h1 class="text-center" th:text="${titulo}"></h1>
         <form th:action="@{/reservas/{id}/edit/save(id=${reserva._id})}" th:object="${reserva}"  method="post">
-            
+            <input type="hidden" th:value="${reserva.id}" name="id" />
             <label  class="col-form-label">Cliente</label>
             <input  class="form-control" type="text" id="cliente" name="cliente" required th:value="${reserva.cliente}" />
             <label  class="col-form-label">sede</label>

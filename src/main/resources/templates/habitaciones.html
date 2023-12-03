@@ -31,6 +31,7 @@
                         <thead>
                             <tr>
                                 <th>ID Habitacion</th>
+                                <th>numero de habitacion</th>
                                 <th>tipo habitacion</th>
                                 <th>Acciones</th>
                                 
@@ -38,9 +39,11 @@
                         </thead>
                         <tbody>
                             <tr th:each="habitacion : ${habitaciones}">
+                                <td th:text="${habitacion.id}"></td>
                                 <td th:text="${habitacion.numero}"></td>
                                 <td th:text="${habitacion.tipoHabitacion}"></td>
                                 <td>
+                                    <a th:href="@{'/sedes/'+ ${sedeId}+'/habitaciones/' + ${habitacion.id}+ '/ocupacionAnual'}"class="btn btn-success btn-sm">Ver % de ocupacion</a>
                                     <a th:href="@{'/sedes/'+ ${sedeId}+'/habitaciones/' + ${habitacion.numero}+ '/edit'}"class="btn btn-warning btn-sm">Editar</a>
                                     <a th:href="@{'/sedes/'+ ${sedeId}+'/habitaciones/' + ${habitacion.numero}+ '/delete'}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de borrar el habitacion?')">Borrar</a>
                                 </td>  

@@ -73,6 +73,7 @@ public class ReservasPorClienteController {
         private String nombreSede;
 
         public ReservaConSede(Reserva reserva, String nombreSede) {
+            this.setId(reserva.getId());
             this.setCheckin(reserva.getCheckin());
             this.setCheckout(reserva.getCheckout());
             this.setSede(reserva.getSede());
@@ -103,7 +104,7 @@ public class ReservasPorClienteController {
     @PostMapping("/clientes/{id_cliente}/reservas/new/save")
     public String createSave(@ModelAttribute Reserva reserva, @PathVariable("id_cliente") String id_cliente) {
         Cliente clienteActual = findClienteById(id_cliente);
-
+        reserva.setIdCustom();
         clienteActual.getReservas().add(reserva);
         clienteRepository.save(clienteActual);
 
