@@ -20,7 +20,7 @@ public class Alojamiento {
     private List<ObjectId> consumos; // Lista de consumos (IDs)
     private ObjectId reserva; // ID de la reserva
     private String cliente; // Nombre del cliente
-    private Reservas reservaInfo;
+    //private Reservas reservaInfo;
     private String fechaLlegada;
     private String fechaSalida;
 

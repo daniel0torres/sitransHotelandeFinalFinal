@@ -1,3 +1,4 @@
+/*
 package co.edu.uniandes.hotelandes.controller;
 import co.edu.uniandes.hotelandes.model.Alojamiento;
 import co.edu.uniandes.hotelandes.model.Reservas;
@@ -25,7 +26,7 @@ public class AlojamientoController {
     AlojamientoRepository alojamientoRepository;
 
     @Autowired
-    ReservasRepository reservaRepository;
+    //ReservasRepository reservaRepository;
     
     @GetMapping("/alojamientos")
     public String obtenerAlojamientosConReserva(Model model) {
@@ -109,3 +110,4 @@ public class AlojamientoController {
         return "redirect:/alojamientos";
     }
 }
+*/

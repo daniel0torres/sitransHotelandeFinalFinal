@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Fragmento</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+
+    </head>
+    <body>
+        <div th:fragment="reservaPorClienteForm(titulo)" class="container border border-2 w-25">
+            <h1 class="text-center" th:text="${titulo}"></h1>
+            <form>
+                
+                 <label class="col-form-label">Hora entrada</label>
+                
+                <input class="form-control" type="text" id="checkin" placeholder="yyyy-MM-dd"name="checkin" required 
+                       th:value="${#dates.format(reserva?.checkin, 'yyyy-MM-dd')}" 
+                       pattern="\d{4}-\d{2}-\d{2}" 
+                       title="Ingrese la fecha en el formato aaaa-mm-dd (por ejemplo, 2023-11-06)" />
+                
+                <label class="col-form-label">Hora salida</label>
+
+                <input class="form-control" type="text" id="checkout" placeholder="yyyy-MM-dd"name="checkout" required 
+                       th:value="${#dates.format(reserva?.checkout, 'yyyy-MM-dd')}" 
+                       pattern="\d{4}-\d{2}-\d{2}" 
+                       title="Ingrese la fecha en el formato aaaa-mm-dd (por ejemplo, 2023-11-06)" />
+
+
+                <label class="col-form-label">Sede</label>
+
+                <select class="form-select" id="sede" name="sede" required>
+                    <option th:each="sedeOption : ${sedes}" th:value="${sedeOption?.id}" th:text="${sedeOption?.nombre}"></option>
+                </select>
+                <h2 th:if="${sede != null}" th:text="${sede.nombre}"></h2>
+
+
+
+                <input type="submit" value="Guardar" class="btn btn-primary"/>
+                <a th:href="@{/clientes/{id_cliente}/reservas(id_cliente=${cliente.id})}" class="btn btn btn-primary">Cancelar</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
+
+
+</body>
+</html>
+

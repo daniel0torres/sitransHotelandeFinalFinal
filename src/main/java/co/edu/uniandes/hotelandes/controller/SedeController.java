@@ -7,8 +7,6 @@ import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,8 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import co.edu.uniandes.hotelandes.model.Alojamiento;
+import co.edu.uniandes.hotelandes.model.Cliente;
 import co.edu.uniandes.hotelandes.model.Habitacion;
-import co.edu.uniandes.hotelandes.model.Reservas;
+import co.edu.uniandes.hotelandes.model.Reserva;
 import co.edu.uniandes.hotelandes.model.Sede;
 import co.edu.uniandes.hotelandes.repository.SedeRepository;
 
@@ -122,4 +121,7 @@ public class SedeController {
         sedeRepository.deleteHabitacion(sedeIdOb, numero);
         return "redirect:/sedes/{sedeId}/habitaciones";
     }
+    
+    
+    
 }

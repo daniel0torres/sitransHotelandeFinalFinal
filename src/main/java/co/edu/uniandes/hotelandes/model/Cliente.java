@@ -16,9 +16,27 @@ public class Cliente {
     private ObjectId _id;
     private String nombre;
     private ArrayList<Consumo> consumos;
+    private ArrayList<Reserva> reservas;
+
+   
+
+    public Cliente(String nombre, ArrayList<Consumo> consumos, ArrayList<Reserva> reservas) {
+        this.nombre = nombre;
+        this.consumos = consumos;
+        this.reservas = reservas;
+    }
     
     public Cliente(){
         consumos = new ArrayList<>();
+        reservas = new ArrayList<>();
+    }
+    
+     public ArrayList<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(ArrayList<Reserva> reservas) {
+        this.reservas = reservas;
     }
 
     public ArrayList<Consumo> getConsumos() {
@@ -30,11 +48,7 @@ public class Cliente {
     }
 
  
-    public Cliente(String nombre, ArrayList<Consumo> consumos) {
-        this.nombre = nombre;
-        this.consumos = consumos;
-    }
-
+    
     public ObjectId getId() {
         return _id;
     }
@@ -51,10 +65,7 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    @Override
-    public String toString() {
-        return "Cliente{" + "_id=" + _id + ", nombre=" + nombre + ", consumos=" + consumos + '}';
-    }
+    
     
     
     

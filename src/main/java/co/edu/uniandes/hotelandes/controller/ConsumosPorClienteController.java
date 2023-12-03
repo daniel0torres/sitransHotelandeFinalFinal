@@ -2,9 +2,9 @@ package co.edu.uniandes.hotelandes.controller;
 
 import co.edu.uniandes.hotelandes.model.Cliente;
 import co.edu.uniandes.hotelandes.model.Consumo;
-import co.edu.uniandes.hotelandes.model.Hello;
+
 import co.edu.uniandes.hotelandes.repository.ClienteRepository;
-import jakarta.websocket.server.PathParam;
+
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -87,7 +87,7 @@ public class ConsumosPorClienteController {
     }
 
     @GetMapping("/clientes/{id_cliente}/consumos/{num_consumo}/delete")
-    public String deleteConsumo(@PathVariable("id_cliente") String id_cliente, @PathVariable("num_consumo") int numConsumo) {
+    public String delete(@PathVariable("id_cliente") String id_cliente, @PathVariable("num_consumo") int numConsumo) {
         Cliente clienteActual = findClienteById(id_cliente);
         clienteActual.getConsumos().remove(numConsumo);
         clienteRepository.save(clienteActual);
