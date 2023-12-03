@@ -11,11 +11,12 @@ import java.util.List;
 public class Sede {
 
     @Id
-    private ObjectId id;
+    private ObjectId _id;
     private String nombre;
     private String telefono;
     private String direccion;
     private List<Habitacion> habitaciones; 
+
 
     public Sede(){}
 
@@ -23,6 +24,47 @@ public class Sede {
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.habitaciones = habitaciones;
+    }   
+    
+
+    public ObjectId get_id() {
+        return _id;
+    }
+
+    public void set_id(ObjectId _id) {
+        this._id = _id;
+    }
+
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getTelefono() {
+        return this.telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return this.direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public List<Habitacion> getHabitaciones() {
+        return this.habitaciones;
+    }
+
+    public void setHabitaciones(List<Habitacion> habitaciones) {
         this.habitaciones = habitaciones;
     }
 

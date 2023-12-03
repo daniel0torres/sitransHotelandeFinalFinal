@@ -3,8 +3,8 @@ package co.edu.uniandes.hotelandes.repository;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import co.edu.uniandes.hotelandes.model.Sede;
+import co.edu.uniandes.hotelandes.model.Servicio;
 
-public interface SedeRepository extends MongoRepository<Sede, ObjectId>, SedeRepositoryCustom {
+public interface ServicioRepository extends MongoRepository<Servicio, ObjectId>{
     
 }
