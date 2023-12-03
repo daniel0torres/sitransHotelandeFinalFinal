@@ -14,12 +14,14 @@ public class Servicio {
     private ObjectId _id;
     private String tipo;
     private String descripcion;
+    private int costo;
     
     public Servicio() {}
 
-    public Servicio(String tipo, String descripcion) {
+    public Servicio(String tipo, String descripcion, int costo) {
         this.tipo = tipo;
         this.descripcion = descripcion;
+        this.costo = costo;
     }
     
 }

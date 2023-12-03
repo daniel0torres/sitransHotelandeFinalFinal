@@ -2,12 +2,22 @@ package co.edu.uniandes.hotelandes.model;
 
 import java.util.Date;
 
+import org.bson.types.ObjectId;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Consumo {
-    private String nombre;
+    private ObjectId servicio;
     private int costo;
-    
+    private String nombre;
+
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
 
@@ -30,19 +40,20 @@ public class Consumo {
     public Consumo(){
         
     }
-    public Consumo(String nombre, int costo, Date fecha) {
-        this.nombre = nombre;
+    public Consumo(ObjectId servicio, int costo, Date fecha, String nombre) {
+        this.servicio = servicio;
         this.costo = costo;
         this.fecha = fecha;
-    }
-
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+
+    public ObjectId getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(ObjectId servicio) {
+        this.servicio = servicio;
     }
 
     public Object getId() {
