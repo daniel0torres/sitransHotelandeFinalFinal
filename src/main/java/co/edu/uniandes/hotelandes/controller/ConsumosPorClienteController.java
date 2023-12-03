@@ -7,14 +7,22 @@ import co.edu.uniandes.hotelandes.repository.ClienteRepository;
 import jakarta.websocket.server.PathParam;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ConsumosPorClienteController {
@@ -94,5 +102,26 @@ public class ConsumosPorClienteController {
 
         return "redirect:/clientes/{id_cliente}/consumos";
     }
+
+
+    @GetMapping("/clientes/{id_cliente}/consumos/filtrar")
+    public String filtrarConsumos(@PathVariable String id_cliente, @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate, Model model) { 
+        Cliente cliente = clienteRepository.findById(id_cliente)
+                         .orElseThrow(() -> new NoSuchElementException("Cliente no encontrado con ID: " + id_cliente));
+
+        
+        if (cliente != null) {
+            List<Consumo> consumosFiltrados = cliente.getConsumos().stream()
+                    .filter(consumo -> !consumo.getFecha().before(startDate) && !consumo.getFecha().after(endDate))
+                    .collect(Collectors.toList());
+            
+            model.addAttribute("consumos", consumosFiltrados);
+        } else {
+            model.addAttribute("mensajeError", "Cliente no encontrado");
+        }
+
+        return "consumosFiltrados";
+    }
+
 
 }

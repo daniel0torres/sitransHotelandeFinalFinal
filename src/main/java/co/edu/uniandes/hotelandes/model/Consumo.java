@@ -1,13 +1,38 @@
 package co.edu.uniandes.hotelandes.model;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Consumo {
     private String nombre;
+    private int costo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date fecha;
+
+    public Date getFecha() {
+        return this.fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public int getCosto() {
+        return this.costo;
+    }
+
+    public void setCosto(int costo) {
+        this.costo = costo;
+    }
     
     public Consumo(){
         
     }
-    public Consumo(String nombre) {
+    public Consumo(String nombre, int costo, Date fecha) {
         this.nombre = nombre;
+        this.costo = costo;
+        this.fecha = fecha;
     }
 
 
@@ -20,7 +45,7 @@ public class Consumo {
     }
 
     public Object getId() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
 }

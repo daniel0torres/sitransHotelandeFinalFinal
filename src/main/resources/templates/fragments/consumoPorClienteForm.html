@@ -13,7 +13,10 @@
         <form>
             <label  class="col-form-label">Name</label>
             <input  class="form-control" type="text" id="nombre" name="nombre" required th:value="${consumo.nombre}" />
-
+            <label  class="col-form-label">Costo</label>
+            <input  class="form-control" type="text" id="costo" name="costo" required th:value="${consumo.costo}" />
+            <label  class="col-form-label">Fecha</label>
+            <input  class="form-control" type="date" id="fecha" name="fecha" required th:value="${consumo.fecha}" />
                 <input type="submit" value="Guardar" class="btn btn-primary"/>
                 <a th:href="@{/clientes/{id_cliente}/consumos(id_cliente=${cliente.id})}" class="btn btn btn-primary">Cancelar</a>
             </div>
