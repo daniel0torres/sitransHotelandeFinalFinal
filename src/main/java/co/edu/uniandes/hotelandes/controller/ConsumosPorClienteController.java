@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -106,15 +107,26 @@ public class ConsumosPorClienteController {
 
     @GetMapping("/clientes/{id_cliente}/consumos/filtrar")
     public String filtrarConsumos(@PathVariable String id_cliente, @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate, Model model) { 
-        Cliente cliente = clienteRepository.findById(id_cliente)
-                         .orElseThrow(() -> new NoSuchElementException("Cliente no encontrado con ID: " + id_cliente));
-
+        Cliente cliente = findClienteById(id_cliente);
+        double costoTotal = 0;
         
         if (cliente != null) {
-            List<Consumo> consumosFiltrados = cliente.getConsumos().stream()
-                    .filter(consumo -> !consumo.getFecha().before(startDate) && !consumo.getFecha().after(endDate))
-                    .collect(Collectors.toList());
-            
+            List<Consumo> consumosOriginales = cliente.getConsumos();
+            List<Consumo> consumosFiltrados = new ArrayList<>();
+            for (Consumo consumo : consumosOriginales) {
+                Date fechaConsumo = consumo.getFecha();
+                System.out.println(consumo.getCosto());
+                if (fechaConsumo != null) {
+                    
+                    if (!fechaConsumo.before(startDate) && !fechaConsumo.after(endDate)) {
+                        consumosFiltrados.add(consumo);
+                        costoTotal += consumo.getCosto();
+                    }
+                }
+            }
+
+            System.out.println(consumosFiltrados);
+            model.addAttribute("costoTotal", costoTotal);
             model.addAttribute("consumos", consumosFiltrados);
         } else {
             model.addAttribute("mensajeError", "Cliente no encontrado");

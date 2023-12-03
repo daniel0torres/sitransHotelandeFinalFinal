@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Consumo {
     private String nombre;
     private int costo;
+    
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
 
