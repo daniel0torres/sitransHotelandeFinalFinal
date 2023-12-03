@@ -8,3 +8,4 @@ import co.edu.uniandes.hotelandes.model.Reservas;
 public interface ReservasRepository extends MongoRepository<Reservas, ObjectId> {
     
 }
+
