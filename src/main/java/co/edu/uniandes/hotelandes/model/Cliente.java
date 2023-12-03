@@ -1,5 +1,6 @@
 package co.edu.uniandes.hotelandes.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -14,21 +15,22 @@ public class Cliente {
     @Id
     private ObjectId _id;
     private String nombre;
-    private List<Consumo> consumos;
+    private ArrayList<Consumo> consumos;
     
     public Cliente(){
-        
+        consumos = new ArrayList<>();
     }
 
-    public List<Consumo> getConsumos() {
+    public ArrayList<Consumo> getConsumos() {
         return consumos;
     }
 
-    public void setConsumos(List<Consumo> consumos) {
+    public void setConsumos(ArrayList<Consumo> consumos) {
         this.consumos = consumos;
     }
 
-    public Cliente(String nombre, List<Consumo> consumos) {
+ 
+    public Cliente(String nombre, ArrayList<Consumo> consumos) {
         this.nombre = nombre;
         this.consumos = consumos;
     }
@@ -47,6 +49,11 @@ public class Cliente {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "_id=" + _id + ", nombre=" + nombre + ", consumos=" + consumos + '}';
     }
     
     

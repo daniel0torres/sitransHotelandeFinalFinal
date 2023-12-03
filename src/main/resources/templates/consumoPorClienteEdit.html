@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editar Consumo</title>
+    <link th:replace="fragments/encabezado.html" />
+</head>
+<body>
+    <nav th:replace="fragments/menu.html"></nav>
+
+    <form th:action="@{'/clientes/' + ${cliente.id} + '/consumos/' + ${num_consumo} + '/edit/save'}" th:object="${consumo}" method="post">
+
+        <div th:replace="~{fragments/consumoPorClienteForm :: consumoPorClienteForm(titulo='Editar consumo', consumo=${consumo})}"></div>
+    </form>
+</body>
+</html>
