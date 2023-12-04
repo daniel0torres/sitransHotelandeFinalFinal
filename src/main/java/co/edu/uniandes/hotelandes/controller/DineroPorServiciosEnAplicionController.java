@@ -21,7 +21,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @Controller
 public class DineroPorServiciosEnAplicionController {
 
@@ -32,55 +31,56 @@ public class DineroPorServiciosEnAplicionController {
     @Autowired
     ServicioRepository servicioRepository;
 
-    
     @GetMapping("/FrontCostoServicio")
-        public String consumo(Model model){
-            
+    public String consumo(Model model) {
+
         return "FrontCostoServicio";
     }
-    
-    @PostMapping("/habitacion/consumos/ok")
-    public String consultarConsumos(Model model, @RequestParam("nombreHabitacion") String id_habitacion) throws IllegalArgumentException {
 
+    @PostMapping("/habitacion/consumos/ok")
+    public String consultarConsumos(Model model, @RequestParam("nombreHabitacion") String nomHabForm) throws IllegalArgumentException {
+        System.out.println("----------------------------------------------" + nomHabForm);
         List<Cliente> clientes = clienteRepository.findAll();
-        LinkedHashMap<String ,ServicioTotal> serviciosTotalMap = new LinkedHashMap<>();
+        LinkedHashMap<String, ServicioTotal> serviciosTotalMap = new LinkedHashMap<>();
 
         for (Cliente cliente : clientes) {
             ArrayList<Consumo> consumos = cliente.getConsumos();
             for (Consumo consumo : consumos) {
+                System.out.println("---------<<<<< " + consumo);
                 String nombreHabitacion = consumo.getNombreHabitacion();
 
-                if (nombreHabitacion.equals(id_habitacion) ) {
+                if (nombreHabitacion.equals(nomHabForm)) {
+                    System.out.println("----ENTRO  -----<<<<< " + consumo);
                     //String nombreHabitacion = consumo.getNombre();
                     ObjectId idServicio = consumo.getServicio();
                     Servicio servicio = servicioRepository.findById(idServicio).orElse(null);
-                    
-                    
-                    
-                    ServicioTotal csh =  serviciosTotalMap.get(idServicio.toHexString());
-                    if (csh == null){        
-                         csh =   new ServicioTotal(servicio);
-                         serviciosTotalMap.put(idServicio.toHexString(), csh);
+                    if (servicio != null) {
+                        ServicioTotal csh = serviciosTotalMap.get(idServicio.toHexString());
+                        if (csh == null) {
+                            csh = new ServicioTotal(servicio);
+                            serviciosTotalMap.put(idServicio.toHexString(), csh);
+                        }
+                        csh.addTotal(consumo.getCosto());
                     }
-                    csh.addTotal(consumo.getCosto());
                 }
 
             }
 
-        }   
-        
+        }
+
         model.addAttribute("consumosTotal", serviciosTotalMap.values());
-        
+
         return "TotalConsumoServioHabitacion";
     }
-    
-    class  ServicioTotal {
-    Servicio servicio;
-    double total;
+
+    class ServicioTotal {
+
+        Servicio servicio;
+        double total;
 
         public ServicioTotal(Servicio servicio) {
             this.servicio = servicio;
-            total =0;
+            total = 0;
         }
 
         public Servicio getServicio() {
@@ -95,11 +95,10 @@ public class DineroPorServiciosEnAplicionController {
             return total;
         }
 
-        public void addTotal(double  add){
+        public void addTotal(double add) {
             total += add;
         }
-    
+
     }
-    
 
 }
