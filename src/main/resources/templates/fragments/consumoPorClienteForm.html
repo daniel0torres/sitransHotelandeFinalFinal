@@ -11,6 +11,12 @@
     <div th:fragment="consumoPorClienteForm(titulo)" class="container border border-2 w-25">
         <h1 class="text-center" th:text="${titulo}"></h1>
         <form>
+            <label  class="col-form-label">Nombre Habitacion</label>
+            <input  class="form-control" type="text" id="nombreHabitacion" name="nombreHabitacion" required th:value="${consumo.nombreHabitacion}" />
+            <label  class="col-form-label">Costo</label>
+            <input  class="form-control" type="Number" id="costo" name="costo" required th:value="${consumo.costo}" />
+            <label  class="col-form-label">Tipo servicio</label>
+            <input  class="form-control" type="text" id="tipoServico" name="tipoServico" required th:value="${consumo.tipoServico}" />
             <label  class="col-form-label">Id servicio</label>
             <input  class="form-control" type="text" id="servicio" name="servicio" required th:value="${consumo.servicio}" />
             <label  class="col-form-label">Fecha</label>

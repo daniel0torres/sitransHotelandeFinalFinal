@@ -8,14 +8,19 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Consumo {
     private ObjectId servicio;
     private int costo;
-    private String nombre;
-
-    public String getNombre() {
-        return this.nombre;
+    private String tipoServico;
+    private String nombreHabitacion;
+    
+    public Consumo(){
+        
     }
+    public Consumo(ObjectId servicio, int costo, Date fecha, String tipoServico,String nombreHabitacion) {
+        this.servicio = servicio;
+        this.costo = costo;
+        this.fecha = fecha;
+        this.tipoServico = tipoServico;
+        this.nombreHabitacion = nombreHabitacion;  
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -29,25 +34,6 @@ public class Consumo {
         this.fecha = fecha;
     }
 
-    public int getCosto() {
-        return this.costo;
-    }
-
-    public void setCosto(int costo) {
-        this.costo = costo;
-    }
-    
-    public Consumo(){
-        
-    }
-    public Consumo(ObjectId servicio, int costo, Date fecha, String nombre) {
-        this.servicio = servicio;
-        this.costo = costo;
-        this.fecha = fecha;
-        this.nombre = nombre;
-    }
-
-
     public ObjectId getServicio() {
         return servicio;
     }
@@ -56,7 +42,36 @@ public class Consumo {
         this.servicio = servicio;
     }
 
+    public int getCosto() {
+        return costo;
+    }
+
+    public void setCosto(int costo) {
+        this.costo = costo;
+    }
+
+    public String getTipoServico() {
+        return tipoServico;
+    }
+
+    public void setTipoServico(String tipoServico) {
+        this.tipoServico = tipoServico;
+    }
+
+    public String getNombreHabitacion() {
+        return nombreHabitacion;
+    }
+
+    public void setNombreHabitacion(String nombreHabitacion) {
+        this.nombreHabitacion = nombreHabitacion;
+    }
+
+    @Override
+    public String toString() {
+        return "Consumo{" + "servicio=" + servicio + "\n costo=" + costo + "\n tipoServico=" + tipoServico + "\n nombreHabitacion=" + nombreHabitacion + "\n fecha=" + fecha + '}';
+    }
+
     
-
+    
+    
 }
-

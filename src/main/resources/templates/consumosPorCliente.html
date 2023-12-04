@@ -41,6 +41,7 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
+                            <th>Nombre habitacion</th>
                             <th>Servicio</th>
                             <th>tipo servicio</th>
                             <th>Costo</th>
@@ -50,8 +51,9 @@
                     </thead>
                     <tbody>
                         <tr th:each="consumo, iterStat : ${consumos}">
+                            <td th:text="${consumo.nombreHabitacion}"></td>
                             <td th:text="${consumo.servicio}"></td>
-                            <td th:text="${consumo.nombre}"></td>
+                            <td th:text="${consumo.tipoServico}"></td>
                             <td th:text="${consumo.costo}"></td>
                             <td th:text="${consumo.fecha}"></td>
                             <td>

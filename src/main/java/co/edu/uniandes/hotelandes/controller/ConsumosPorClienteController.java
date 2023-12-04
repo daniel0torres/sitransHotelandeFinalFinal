@@ -3,6 +3,8 @@ package co.edu.uniandes.hotelandes.controller;
 import co.edu.uniandes.hotelandes.model.Cliente;
 import co.edu.uniandes.hotelandes.model.Consumo;
 import co.edu.uniandes.hotelandes.model.Hello;
+import co.edu.uniandes.hotelandes.model.Reserva;
+import co.edu.uniandes.hotelandes.model.Sede;
 import co.edu.uniandes.hotelandes.model.Servicio;
 import co.edu.uniandes.hotelandes.repository.ClienteRepository;
 import co.edu.uniandes.hotelandes.repository.ServicioRepository;
@@ -68,18 +70,22 @@ public class ConsumosPorClienteController {
 
     @PostMapping("/clientes/{id_cliente}/consumos/new/save")
     public String createSave(@ModelAttribute Consumo consumo, @PathVariable("id_cliente") String id_cliente) {
+        System.out.println("CONSUMO ENTRANTE");
+        System.out.println(consumo);
         Cliente clienteActual = findClienteById(id_cliente);
         ObjectId servicioId = consumo.getServicio();
         Servicio servicio = servicioRepository.findById(servicioId).orElseThrow(() -> new IllegalArgumentException("Servicio no encontrado con ID: " + servicioId));
+        
         String nombre = servicio.getTipo();
         Integer costo = servicio.getCosto();
         consumo.setCosto(costo);
-        consumo.setNombre(nombre);
+        consumo.setTipoServico(nombre);
+        //consumo.setNombreHabitacion("NOMBRE HAB");
         clienteActual.getConsumos().add(consumo);
         clienteRepository.save(clienteActual);
         return "redirect:/clientes/{id_cliente}/consumos";
-    }
-
+    }   
+    
     @GetMapping("/clientes/{id_cliente}/consumos/{num_consumo}/edit")
     public String update(Model model, @PathVariable("id_cliente") String id_cliente, @PathVariable("num_consumo") int numConsumo) {
         Cliente clienteActual = findClienteById(id_cliente);

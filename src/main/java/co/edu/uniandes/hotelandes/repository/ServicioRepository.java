@@ -7,4 +7,6 @@ import co.edu.uniandes.hotelandes.model.Servicio;
 
 public interface ServicioRepository extends MongoRepository<Servicio, ObjectId>{
     
+    Servicio findBy_id(ObjectId id);
+    
 }
