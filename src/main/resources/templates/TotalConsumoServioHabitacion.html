@@ -30,7 +30,7 @@
                     </thead>
                     <tbody>
                         <tr th:each="consumoTotal : ${consumosTotal}">
-                            <td th:text="${consumoTotal.servicio.tipo}"></td>
+                            <td th:text="${consumoTotal.servicio?.tipo}"></td>
                             <td th:text="${consumoTotal.total}"></td>
                             
                         </tr>

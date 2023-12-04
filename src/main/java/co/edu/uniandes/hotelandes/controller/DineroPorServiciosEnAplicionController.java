@@ -54,14 +54,13 @@ public class DineroPorServiciosEnAplicionController {
                     //String nombreHabitacion = consumo.getNombre();
                     ObjectId idServicio = consumo.getServicio();
                     Servicio servicio = servicioRepository.findById(idServicio).orElse(null);
-                    if (servicio != null) {
-                        ServicioTotal csh = serviciosTotalMap.get(idServicio.toHexString());
-                        if (csh == null) {
-                            csh = new ServicioTotal(servicio);
-                            serviciosTotalMap.put(idServicio.toHexString(), csh);
-                        }
-                        csh.addTotal(consumo.getCosto());
+                    ServicioTotal csh = serviciosTotalMap.get(idServicio.toHexString());
+                    if (csh == null) {
+                        csh = new ServicioTotal(servicio);
+                        serviciosTotalMap.put(idServicio.toHexString(), csh);
                     }
+                    csh.addTotal(consumo.getCosto());
+
                 }
 
             }
