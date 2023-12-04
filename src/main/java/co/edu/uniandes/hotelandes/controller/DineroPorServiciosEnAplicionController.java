@@ -18,6 +18,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import org.bson.types.ObjectId;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -37,8 +39,8 @@ public class DineroPorServiciosEnAplicionController {
         return "FrontCostoServicio";
     }
     
-    @GetMapping("/habitacion/{id_habitacion}/consumos")
-    public String consultarConsumos(Model model, @PathVariable("id_habitacion") String id_habitacion) throws IllegalArgumentException {
+    @PostMapping("/habitacion/consumos/ok")
+    public String consultarConsumos(Model model, @RequestParam("nombreHabitacion") String id_habitacion) throws IllegalArgumentException {
 
         List<Cliente> clientes = clienteRepository.findAll();
         LinkedHashMap<String ,ServicioTotal> serviciosTotalMap = new LinkedHashMap<>();
