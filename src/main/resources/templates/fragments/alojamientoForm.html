@@ -14,7 +14,7 @@
             <label  class="col-form-label">habitacion id</label>
             <input  class="form-control" type="text" id="habitacion" name="habitacion" required th:value="${alojamiento.habitacionId}" />
             <label  class="col-form-label">reserva id</label>
-            <input  class="form-control" type="text" id="reserva" name="reserva" required th:value="${alojamiento.reserva}" />
+            <input  class="form-control" type="text" id="id_reserva" name="id_reserva" required th:value="${alojamiento.reserva}" />
             <div class="text-center">
                 <input type="submit" value="Guardar" class="btn btn-primary"/>
                 <a th:href="@{/alojamientos}" class="btn btn btn-primary">Cancelar</a>

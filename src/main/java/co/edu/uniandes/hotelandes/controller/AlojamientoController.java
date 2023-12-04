@@ -1,12 +1,17 @@
 
 package co.edu.uniandes.hotelandes.controller;
 import co.edu.uniandes.hotelandes.model.Alojamiento;
-import co.edu.uniandes.hotelandes.model.Reservas;
+import co.edu.uniandes.hotelandes.model.Cliente;
+import co.edu.uniandes.hotelandes.model.Consumo;
+import co.edu.uniandes.hotelandes.model.Reserva;
+//import co.edu.uniandes.hotelandes.model.Reservas;
 import co.edu.uniandes.hotelandes.model.Sede;
 import co.edu.uniandes.hotelandes.repository.AlojamientoRepository;
+import co.edu.uniandes.hotelandes.repository.ClienteRepository;
 import co.edu.uniandes.hotelandes.repository.ReservasRepository;
 import co.edu.uniandes.hotelandes.repository.SedeRepository;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -29,34 +34,54 @@ public class AlojamientoController {
     @Autowired
     AlojamientoRepository alojamientoRepository;
 
-    @Autowired
-    ReservasRepository reservaRepository;
+    //@Autowired
+    //ReservasRepository reservaRepository;
     
     @Autowired
     SedeRepository sedeRepository;
 
+    @Autowired
+    ClienteRepository clienteRepository;
+
     @GetMapping("/alojamientos")
     public String obtenerAlojamientosConReserva(Model model) {
-        List<Alojamiento> alojamientos = alojamientoRepository.findAlojamientoConReserva();
-        model.addAttribute("alojamientos", alojamientos);
+        //List<Alojamiento> alojamientos = alojamientoRepository.findAlojamientoConReserva();
+        model.addAttribute("alojamientos", alojamientoRepository.findAll());
         return "alojamientos"; 
     }
 
     
-    @GetMapping("/alojamientos/new")
-    public String create(Model model) {
+    @GetMapping("/alojamientos/new/{id_cliente}")
+    public String create(Model model, @PathVariable("id_cliente") String id_cliente) throws IllegalArgumentException {
+        ObjectId objectId = new ObjectId(id_cliente);
+        Cliente clienteActual = clienteRepository.findById(objectId).orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado con ID: " + id_cliente));
         model.addAttribute("alojamiento", new Alojamiento());
+        model.addAttribute("cliente", clienteActual);
         return "alojamientoNew";
     }
+   
+    
 
 
 
-    @PostMapping("/alojamientos/new/save")
-    public String createSave(@RequestParam String habitacion, @RequestParam String reserva, Model model) {
+    @PostMapping("/alojamientos/new/save/{id_cliente}")
+    public String createSave(@PathVariable("id_cliente") String id_cliente,@RequestParam String habitacion, @RequestParam("id_reserva") String id_reserva, Model model) {
+                System.out.println("----------------------------------------------EMPEZANDO" );
 
-        ObjectId reservaId = new ObjectId(reserva);
-        Reservas reservaObj = reservaRepository.findById(reservaId).orElse(null);
+        Cliente cliente = clienteRepository.findById(new ObjectId(id_cliente)).orElse(null);
+        ArrayList<Reserva> reservas = cliente.getReservas();
+        Reserva reservaOriginal = null;
+        System.out.println("----------------------------------------------aun no entra" );
+        for (Reserva reserva : reservas) {
+            System.out.println("----------------------------------------------entro al ciclo" );
+            ObjectId CompararReservaId =reserva.getId();
             
+            if ( CompararReservaId.toHexString().equals(id_reserva)){
+                reservaOriginal = reserva;
+            }
+        }    
+        //Reservas reservaObj = reservaRepository.findById(reservaId).orElse(null);
+        /* 
         if (reservaObj == null) {
             model.addAttribute("error", "Reserva no encontrada.");
             return "redirect:/alojamientos"; 
@@ -67,14 +92,16 @@ public class AlojamientoController {
             model.addAttribute("error", "Ya existe un alojamiento con esta reserva.");
             return "redirect:/alojamientos"; 
         }
-
-        String cliente = reservaObj.getCliente(); 
-        Date fechaLlegada =reservaObj.getCheckin();
-        Date fechaSalida = reservaObj.getCheckout();
+        */
+        ObjectId reservaId =reservaOriginal.getId();
+        
+        String clienteName = id_cliente; 
+        Date fechaLlegada =reservaOriginal.getCheckin();
+        Date fechaSalida = reservaOriginal.getCheckout();
         ObjectId habitacionId = new ObjectId(habitacion);
         List<Sede> sedes = sedeRepository.findAll();
         String habitacionNombre = sedeRepository.findHabitacionById(habitacionId, sedes);
-        Alojamiento alojamiento = new Alojamiento(habitacionId, reservaId, cliente, fechaLlegada, fechaSalida, habitacionNombre);
+        Alojamiento alojamiento = new Alojamiento(habitacionId, reservaId, clienteName, fechaLlegada, fechaSalida, habitacionNombre);
         alojamientoRepository.insert(alojamiento);
         return "redirect:/alojamientos";
     }

@@ -43,6 +43,7 @@
                             <td th:text="${reserva.checkin}"></td>
                             <td th:text="${reserva.checkout}"></td>
                             <td>
+                                <a th:href="@{'/alojamientos/new/' + ${cliente.id} + ''}" class="btn btn-primary btn-sm">Crear alojamiento</a>
                                 <a th:href="@{'/clientes/' + ${cliente.id} + '/reservas/' + ${iterStat.index} + '/edit'}" class="btn btn-warning btn-sm">Editar</a>
                                 <a th:href="@{'/clientes/' + ${cliente.id} + '/reservas/' + ${iterStat.index} + '/delete'}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de borrar esta reserva?')">Borrar</a>
                             </td>
